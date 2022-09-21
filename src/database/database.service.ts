@@ -5,8 +5,4 @@ import { Injectable } from '@nestjs/common';
   必须使用Injectable才能让nest去provider中找到对应的service处理
 */
 @Injectable()
-export class DatabaseService {
-  connect() {
-    return 'x';
-  }
-}
+export class DatabaseService {}
