@@ -11,18 +11,47 @@ datasource db {
 }
 
 model user {
-  id          BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  id          BigInt     @id @default(autoincrement()) @db.UnsignedBigInt
   password    String
   email       String?
   avatar      String?
   introduce   String?
+  create_time DateTime   @default(now())
+  update_time DateTime   @updatedAt
+  tools       tool[]
+  skills      skill[]
+  bookmarks   bookmark[]
+}
+
+model tool {
+  id          BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  img_src     String
+  label       String
+  link        String
+  user        user     @relation(fields: [userId], references: [id])
+  userId      BigInt   @db.UnsignedBigInt
   create_time DateTime @default(now())
   update_time DateTime @updatedAt
 }
 
-model tools {
-  id     BigInt @id @default(autoincrement()) @db.UnsignedBigInt
-  img_src String @db.Text
-  label  String
-  link   String
+model skill {
+  id          BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  img_src     String
+  label       String
+  description String
+  user        user     @relation(fields: [userId], references: [id])
+  userId      BigInt   @db.UnsignedBigInt
+  create_time DateTime @default(now())
+  update_time DateTime @updatedAt
+}
+
+model bookmark {
+  id          BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  img_src     String
+  label       String
+  link        String
+  user        user     @relation(fields: [userId], references: [id])
+  userId      BigInt   @db.UnsignedBigInt
+  create_time DateTime @default(now())
+  update_time DateTime @updatedAt
 }
