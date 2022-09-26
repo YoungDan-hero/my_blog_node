@@ -7,10 +7,8 @@ import {
 @ValidatorConstraint()
 export class IsConfirmed implements ValidatorConstraintInterface {
   validate(value: string, args: ValidationArguments) {
-    console.log(value);
-    console.log(args);
-    return false;
+    return (
+      (args.object as any).password === (args.object as any).confirm_password
+    );
   }
 }
-
-// @Validate(IsConfirmed)
